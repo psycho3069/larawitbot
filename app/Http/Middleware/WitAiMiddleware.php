@@ -2,9 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Conversations\QuestionConversation;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\Interfaces\Middleware\Received;
+use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
+use BotMan\BotMan\Messages\Outgoing\Actions\Button;
+use BotMan\BotMan\Messages\Outgoing\Question;
 
 class WitAiMiddleware implements Received
 {
@@ -46,7 +50,14 @@ class WitAiMiddleware implements Received
                     $bot->reply('We provide Hajj Package for the Muslims in Bangladesh!');
                     break;
                 case 'priceOfService':
-                    $bot->reply('Our Hajj Package costs $2000 from Dhaka, Bangladesh!');
+                    $bot->reply('Our Hajj Package costs $2000 from Dhaka and $2100 from anywhere else in Bangladesh!');
+                    break;
+                case 'serviceAtLocation':
+                    // dd($entities['wit$location:location']);
+                    $bot->reply("Yes, it is available in {$entities['wit$location:location'][0]['body']}!");
+                    break;
+                case 'query':
+                    $bot->reply("Sure, You can try our Hajj Package which is cost efficient and very much comfortable even for olders");
                     break;
                 default:
                     $bot->reply('I actually don\'t get what you want!');
@@ -57,5 +68,10 @@ class WitAiMiddleware implements Received
         }
 
         return $next($message);
+    }
+
+    public function startQuestion(BotMan $bot)
+    {
+        $bot->startConversation(new QuestionConversation());
     }
 }

@@ -9,19 +9,19 @@ use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Conversations\Conversation;
 
-class ExampleConversation extends Conversation
+class QuestionConversation extends Conversation
 {
     /**
      * First question
      */
     public function askReason()
     {
-        $question = Question::create("Hey, what do yo need?")
+        $question = Question::create("Sure, what do yo want to know?")
             ->fallback('Unable to ask question')
             ->callbackId('ask_reason')
             ->addButtons([
-                Button::create('Ask me about a service')->value('service'),
-                Button::create('Recommend some services')->value('recommend'),
+                Button::create('Recommend me something')->value('recommend'),
+                Button::create('Recommend me somwthing')->value('recommend'),
             ]);
 
         return $this->ask($question, function (Answer $answer) {
