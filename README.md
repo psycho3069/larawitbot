@@ -14,3 +14,11 @@ This is a simple project that utilizes [WIT AI API](https://wit.ai/) and also us
 -   This is a AI based Chatbot which can have a conversation with the customer interactively
 -   The wit ai uses open source NLM to train the model/app so that it can understand intents and entities
 -   Thus, by training it time to time will make it more efficient and improved
+
+## Usage
+
+Try asking the below question:
+
+-   hi, hey, hello
+-   what service do you provide?
+-   what is the cost of your service?
