@@ -21,10 +21,6 @@ Route::get('/', function () {
 
 $botman = resolve('botman');
 
-$botman->hears('Hi', function ($bot) {
-    $bot->reply('Hello!');
-});
-
 $botman->hears('Start conversation', BotManController::class . '@startConversation');
 
 Route::match(['get', 'post'], '/botman', BotManController::class . '@handle');

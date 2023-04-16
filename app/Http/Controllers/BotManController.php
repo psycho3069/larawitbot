@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CustomMatchingMiddleware;
+use App\Http\Middleware\WitAiMiddleware;
 use Illuminate\Http\Request;
 use BotMan\BotMan\BotMan;
 use BotMan\BotMan\BotManFactory;
@@ -16,6 +18,10 @@ class BotManController extends Controller
     public function handle()
     {
         $botman = app('botman');
+
+        $middleware = new WitAiMiddleware();
+
+        $botman->middleware->received($middleware);
 
         $botman->listen();
     }
